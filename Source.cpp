@@ -167,7 +167,7 @@ void jobGenerator()
         n = rand() % 100 + 1;
         cout << "jobGenerator: Job number is : " << n << endl;
         // Put the job n into the priority queue
-        // TODO
+        // write jobs into file
 
         usleep(100); //100 can be adjusted to synchronize the job generation and job scheduling processes.
         i++;
