@@ -124,6 +124,7 @@ string* queLoader(string fileName)
     }
 
 
+
     queFile.close();
 
     return theQue;
@@ -162,7 +163,7 @@ int main()
 void setJobQueues()
 {
     cout << "Main: Set up the job priority queue: \n";
-    queLoader("serverqueue.txt");
+    queLoader(fileServerQueue);
 
 }
 
