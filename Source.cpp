@@ -137,7 +137,7 @@ int main()
 void setJobQueues()
 {
     cout << "Main: Set up the job priority queue: \n";
-    /* ... */
+    
 }
 
 void jobGenerator()
@@ -185,14 +185,18 @@ void executeJob(int n)
 {
     if (n >= 1 && n <= 30) {
         cout << "executeJob: execute server job " << n << endl;
-        /* ... */
+        cout << pid;
+        cout << "Server job finished" << endl;
     }
     else if (n >= 31 && n <= 60) {
         cout << "executeJob: execute power user job " << n << endl;
-        /* ... */
+        sleep();
+        signal(SIGINT, wake_up);
+        cout << "Power user job finished" << endl;
     }
     else if (n >= 61 && n <= 100) {
         cout << "executeJob: execute user job " << n << endl;
-        /* ... */
+        sleep(2);
+        cout << "User job finished" << endl;
     }
 }
