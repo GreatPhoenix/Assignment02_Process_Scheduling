@@ -126,13 +126,10 @@ string* queLoader(string fileName)
     {
         queFile >> theQue[i];
     }
-}
 
-    
     queFile.close();
 
     return theQue;
-
 }
 
 bool updateQue(string fileArray[], string fileName) {
