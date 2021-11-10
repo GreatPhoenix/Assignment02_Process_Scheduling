@@ -103,7 +103,7 @@ string * queLoader (string fileName)
     for (int i = 0; i <= 30; i++){
         queFile >> theQue[i];
     }
-    queFile.close(fileName);
+    queFile.close();
 
     return theQue;
 
