@@ -1,8 +1,11 @@
 #include <queue>
+#include <iostream>
 
 int N = 10;
-
-
+int MAX_JOB_QUEUE = 30;
+queue<int> SERVER_QUEUE;
+queue<int> POWER_USER_QUEUE;
+queue<int> USER_QUEUE;
 
 int main() 
 {

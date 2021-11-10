@@ -46,6 +46,7 @@ int main()
     return 1;
 }
 
+// pause everything
 void down(int* semid, char* semname)
 {
     while (*semid = creat(semname, 0) == -1) /* && error == EACCES)*/
@@ -55,6 +56,7 @@ void down(int* semid, char* semname)
     }
 }
 
+// continue everything
 void up(int semid, char* semname)
 {
     close(semid);
