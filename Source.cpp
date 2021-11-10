@@ -42,7 +42,6 @@ void jobScheduler()
 {
         while (i < N) 
         {           /* schedule and run maximum N jobs */
-
             n = selectJob();      /* pick a job from the job priority queues */
 
                 if (n > 0) 
@@ -60,7 +59,21 @@ void jobScheduler()
 
 void executeJob()
 {
+    if (/*serverqueue*/)
+    {
 
+    }
+    if (/*poweruserqueue*/)
+    {
+        signal()
+
+        // run
+    }
+    if (/*userqueue*/)
+    {
+        sleep(2);
+        // run
+    }
 }
 
 int selectJob()
