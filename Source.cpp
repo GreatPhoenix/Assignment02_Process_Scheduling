@@ -15,7 +15,7 @@ void setJobQueues();
 void jobGenerator();
 void jobScheduler();
 int selectJob();
-void executeJob(int n);
+void executeJob(int n, int pid);
 queue<int> SERVER_QUEUE;
 queue<int> POWER_USER_QUEUE;
 queue<int> USER_QUEUE;
