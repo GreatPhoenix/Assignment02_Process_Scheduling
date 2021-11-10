@@ -193,19 +193,19 @@ int selectJob()
 {
     int n = 0;
     cout << "selectJob: Select a highest priority job from the priority queue: \n";
-    if (SERVER_QUEUE.size > 0)
+    if (SERVER_QUEUE.size() > 0)
     {
         n = SERVER_QUEUE.front();
         SERVER_QUEUE.pop();
     }
-    else if (POWER_USER_QUEUE.size > 0)
+    else if (POWER_USER_QUEUE.size() > 0)
     {
         n = POWER_USER_QUEUE.front();
         POWER_USER_QUEUE.pop();
     }
-    else if (USER_QUEUE.size > 0)
+    else if (USER_QUEUE.size() > 0)
     {
-        n = USER_QUEUE.font();
+        n = USER_QUEUE.front();
         USER_QUEUE.pop();
     }
         
