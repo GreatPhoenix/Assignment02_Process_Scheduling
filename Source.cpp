@@ -19,6 +19,11 @@ void executeJob(int n);
 queue<int> SERVER_QUEUE;
 queue<int> POWER_USER_QUEUE;
 queue<int> USER_QUEUE;
+string fileServerQueue = "serverQueue.txt";
+string filePowerUserQueue = "powerUserQueue.txt";
+string fileUserQueue = "userQueue.txt";
+
+
 
 //int main() 
 //{
@@ -114,6 +119,8 @@ string * queLoader (string fileName)
     for (int i = 0; i <= 30; i++){
         queFile >> theQue[i];
     }
+
+
     queFile.close();
 
     return theQue;
