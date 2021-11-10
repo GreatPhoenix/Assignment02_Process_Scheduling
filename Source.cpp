@@ -152,7 +152,8 @@ int main()
 void setJobQueues()
 {
     cout << "Main: Set up the job priority queue: \n";
-    // TODO
+    queLoader("serverqueue.txt");
+
 }
 
 void jobGenerator()
