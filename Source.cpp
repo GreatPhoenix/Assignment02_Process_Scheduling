@@ -181,7 +181,7 @@ void jobScheduler()
         n = selectJob(); /* pick a job from the job priority queues */
         if (n > 0) { /* valid job id */
             if (pid = fork() == 0) { /* child worker process */
-                executeJob(n); /* execute the job */
+                executeJob(n, pid); /* execute the job */
                 exit(0);
             }
         }
@@ -212,7 +212,7 @@ int selectJob()
     return n;
 }
 
-void executeJob(int n)
+void executeJob(int n, int pid)
 {
     if (n >= 1 && n <= 30) {
         cout << "executeJob: execute server job " << n << endl;
