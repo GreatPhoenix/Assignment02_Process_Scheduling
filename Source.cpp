@@ -91,6 +91,10 @@ void setJobQueues()
 // must access
 void jobGenerator()
 {
+//needs access to fucking;
+//string it = "um um";
+//i cant find it.sort();
+//pertabricadactol;
 
 }
 
