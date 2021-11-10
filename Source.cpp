@@ -3,16 +3,19 @@
 int N = 10;
 
 
+
 int main() 
 {
-        setJobQueues();           /* Set up the priority job queues with chosen file and data structure */
+    setJobQueues();           /* Set up the priority job queues with chosen file and data structure */
 
-    if (pid = fork() > 0) {/* Parent, jobGenerator process */
+    if (pid = fork() > 0) 
+    {/* Parent, jobGenerator process */
 
         jobGenerator(…); /* generate random jobs and put them into the priority queues
                                              The priority queues must be protected in a critical region */
     }
-    else {/* Child, job scheduler process */
+    else 
+    {/* Child, job scheduler process */
 
         jobScheduler(…); /* schedule and execute the jobs. */
 
@@ -47,6 +50,16 @@ void executeJob(...)
 }
 
 void selectJob(...)
+{
+
+}
+
+void setJobQueues()
+{
+
+}
+
+void jobGenerator()
 {
 
 }
