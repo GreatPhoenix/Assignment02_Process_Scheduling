@@ -15,9 +15,9 @@ void jobGenerator();
 void jobScheduler();
 int selectJob();
 void executeJob(int n);
-//queue<int> SERVER_QUEUE;
-//queue<int> POWER_USER_QUEUE;
-//queue<int> USER_QUEUE;
+queue<int> SERVER_QUEUE;
+queue<int> POWER_USER_QUEUE;
+queue<int> USER_QUEUE;
 
 //int main() 
 //{
