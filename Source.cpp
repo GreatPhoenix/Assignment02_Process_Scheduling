@@ -59,8 +59,10 @@ void executeJob()
 
 }
 
-void selectJob()
+int selectJob()
 {
+    int n;
+
     if (SERVER_QUEUE.size > 0)
     {
 
@@ -73,6 +75,8 @@ void selectJob()
     {
 
     }
+
+    return n;
 }
 
 void setJobQueues()
