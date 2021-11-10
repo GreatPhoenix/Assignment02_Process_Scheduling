@@ -190,7 +190,7 @@ void jobScheduler()
 
 int selectJob()
 {
-    int n = 1;
+    int n = 0;
     cout << "selectJob: Select a highest priority job from the priority queue: \n";
     if (SERVER_QUEUE.size > 0)
     {
