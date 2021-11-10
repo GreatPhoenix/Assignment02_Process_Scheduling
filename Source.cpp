@@ -119,13 +119,14 @@ string* queLoader(string fileName)
     string theQue[30];
     ifstream queFile;
 
-    if (queFile.open(fileName)){
-        cout << "yeah i open " << fileName << endl; 
+    queFile.open(fileName);
+    cout << "yeah i open " << fileName << endl; 
         
-        for (int i = 0; i <= 30; i++) {
+    for (int i = 0; i <= 30; i++) 
+    {
         queFile >> theQue[i];
     }
-    }
+}
 
     
     queFile.close();
