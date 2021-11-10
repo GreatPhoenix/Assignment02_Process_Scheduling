@@ -148,9 +148,6 @@ void queLoader(string fileName)
     }
 
     queFile.close();
-
-    
-    
 }
 
 bool updateQue(string fileArray[], string fileName) {
