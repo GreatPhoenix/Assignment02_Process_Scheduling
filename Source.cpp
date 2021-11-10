@@ -5,6 +5,7 @@
 // include c++ header files
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <queue>
 #include <signal.h>
 #define N 3 //N is the number of the worker processes. You may increase N to 100 when your program runs correctly
