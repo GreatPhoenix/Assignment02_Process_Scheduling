@@ -81,7 +81,8 @@ void jobGenerator()
 
 }
 
-string queLoader (string fileName){
+string queLoader (string fileName)
+{
     string theQue[30]
     ifstream queFile;
     queFile.open(fileName);
