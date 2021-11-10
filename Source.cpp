@@ -119,6 +119,18 @@ string * queLoader (string fileName)
 
 }
 
+bool updateQue (string fileArray[], string fileName){
+    ifstream queFile;
+    queFile.open(fileName);
+
+    for (int i = 0; i <= 30; i++){
+        queFile << fileArray[i] << endl;
+
+    }
+    queFile.close();
+
+}
+
 int main() 
 {
     int pid = 0;
