@@ -1,14 +1,20 @@
-#include <queue>
+#include <stdlib.h>
+#include <unistd.h> // for function fork()
+#include <stdio.h>
+#include <time.h> //for generate random seed
+// include c++ header files
+#include <string>
 #include <iostream>
-#include <unistd.h>
-#include <string.h>
-#include <fstream>
-#include <sstream>
+#define N 3 //N is the number of the worker processes. You may increase N to 100 when your program runs correctly
+#define M 3 //M is the number of jobs. You may increase M to 50 when your program runs correctly
 
 using namespace std;
 
-int N = 10;
-int MAX_JOB_QUEUE = 30;
+void setJobQueues();
+void jobGenerator();
+void jobScheduler();
+int selectJob();
+void executeJob(int n);
 //queue<int> SERVER_QUEUE;
 //queue<int> POWER_USER_QUEUE;
 //queue<int> USER_QUEUE;
