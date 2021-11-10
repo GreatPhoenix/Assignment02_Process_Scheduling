@@ -119,9 +119,9 @@ void addToQue(string itemToAdd, queue<int> whatQueueToUse) {
 
 }
 
-int* queLoader(string fileName)
+void queLoader(string fileName)
 {
-    int theQue[30];
+    
     ifstream queFile;
     string temp;
     queFile.open(fileName);
@@ -150,7 +150,7 @@ int* queLoader(string fileName)
     queFile.close();
 
     
-    return theQue;
+    
 }
 
 bool updateQue(string fileArray[], string fileName) {
