@@ -1,3 +1,4 @@
+//Liam Barrett, Bridget Whitacre, EJ Flores
 #include <stdlib.h>
 #include <unistd.h> // for function fork()
 #include <stdio.h>
