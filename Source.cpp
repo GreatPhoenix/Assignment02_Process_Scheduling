@@ -1,6 +1,7 @@
 #include <queue>
 #include <iostream>
 #include <unistd.h>
+#include <string.h>
 #include <fstream>
 #include <sstream>
 
@@ -88,5 +89,19 @@ void setJobQueues()
 
 void jobGenerator()
 {
+
+}
+
+string queLoader (string fileName){
+    string theQue[30]
+    ifstream queFile;
+    queFile.open(fileName);
+    
+    for (int i = 0; i <= 30; i++){
+        queFile >> theQue[i];
+    }
+    queFile.close(fileName);
+
+    return theQue;
 
 }
