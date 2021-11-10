@@ -2,6 +2,8 @@
 #include <iostream>
 #include <unistd.h>
 
+using namespace std;
+
 int N = 10;
 int MAX_JOB_QUEUE = 30;
 queue<int> SERVER_QUEUE;
@@ -27,6 +29,7 @@ int main()
 
         exit(0);
     }
+
     while ((wpid = wait(&status)) > 0);
     return (1);
 }
@@ -51,14 +54,25 @@ void jobScheduler(…)
         }
 }
 
-void executeJob(...)
+void executeJob()
 {
 
 }
 
-void selectJob(...)
+void selectJob()
 {
+    if (SERVER_QUEUE.size > 0)
+    {
 
+    }
+    else if (POWER_USER_QUEUE.size > 0)
+    {
+
+    }
+    else if (USER_QUEUE.size > 0)
+    {
+
+    }
 }
 
 void setJobQueues()
