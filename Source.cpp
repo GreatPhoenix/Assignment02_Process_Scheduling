@@ -129,6 +129,8 @@ bool updateQue (string fileArray[], string fileName){
     }
     queFile.close();
 
+    return(true);
+
 }
 
 int main() 
