@@ -3,6 +3,7 @@
 #include <unistd.h> // for function fork()
 #include <stdio.h>
 #include <time.h> //for generate random seed
+#include <fcntl.h>
 // include c++ header files
 #include <string>
 #include <iostream>
