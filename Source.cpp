@@ -5,6 +5,7 @@
 // include c++ header files
 #include <string>
 #include <iostream>
+#include <queue>
 #define N 3 //N is the number of the worker processes. You may increase N to 100 when your program runs correctly
 #define M 3 //M is the number of jobs. You may increase M to 50 when your program runs correctly
 
@@ -191,7 +192,22 @@ int selectJob()
 {
     int n = 1;
     cout << "selectJob: Select a highest priority job from the priority queue: \n";
-    /* ... */
+    if (SERVER_QUEUE.size > 0)
+    {
+        n = SERVER_QUEUE.front();
+        SERVER_QUEUE.pop();
+    }
+    else if (POWER_USER_QUEUE.size > 0)
+    {
+        n = POWER_USER_QUEUE.front();
+        POWER_USER_QUEUE.pop();
+    }
+    else if (USER_QUEUE.size > 0)
+    {
+        n = USER_QUEUE.font();
+        USER_QUEUE.pop();
+    }
+        
     return n;
 }
 
