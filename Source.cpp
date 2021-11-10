@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <queue>
+#include <signal.h>
 #define N 3 //N is the number of the worker processes. You may increase N to 100 when your program runs correctly
 #define M 3 //M is the number of jobs. You may increase M to 50 when your program runs correctly
 
