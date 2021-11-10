@@ -8,7 +8,6 @@
 #include <fcntl.h>
 
 using namespace std;
-
 void down(int* semid, char* semname);
 void up(int semid, char* semname);
 
