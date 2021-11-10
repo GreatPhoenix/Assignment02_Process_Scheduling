@@ -114,10 +114,8 @@ int intr = 0;
 //
 //}
 
-void addToQue(int arrayQue[], queue<int> whatQueueToUse) {
-    for (int i = 0; i <= 30; i++) {
-        whatQueueToUse.push(arrayQue[i]);
-    }
+void addToQue(string itemToAdd, queue<int> whatQueueToUse) {
+    whatQueueToUse.push(stoi(itemToAdd));
 
 }
 
@@ -125,33 +123,33 @@ int* queLoader(string fileName)
 {
     int theQue[30];
     ifstream queFile;
-
+    string temp;
     queFile.open(fileName);
     cout << "yeah i open " << fileName << endl; 
         
-    for (int i = 0; i <= 30; i++) 
+    while (queFile >> temp) 
+
     {
-        getline(queFile, i) >> theQue[i];
-    }
-
-    queFile.close();
-
-    if (fileName == fileServerQueue){
-        addToQue(theQue,SERVER_QUEUE);
+        if (fileName == fileServerQueue){
+        addToQue(temp,SERVER_QUEUE);
     }
     else if (fileName == filePowerUserQueue){
-        addToQue(theQue,POWER_USER_QUEUE);
+        addToQue(temp,POWER_USER_QUEUE);
 
     }
     else if (fileName == fileUserQueue){
-        addToQue(theQue,USER_QUEUE);
+        addToQue(temp,USER_QUEUE);
 
     }
     else{
         cout << "welp somone typed in somthing wrong" << endl;
     }
 
+    }
 
+    queFile.close();
+
+    
     return theQue;
 }
 
