@@ -15,7 +15,7 @@ void setJobQueues();
 void jobGenerator();
 void jobScheduler();
 int selectJob();
-void executeJob(int n);
+void executeJob(int n, int pid);
 queue<int> SERVER_QUEUE;
 queue<int> POWER_USER_QUEUE;
 queue<int> USER_QUEUE;
@@ -188,7 +188,7 @@ void jobScheduler()
         n = selectJob(); /* pick a job from the job priority queues */
         if (n > 0) { /* valid job id */
             if (pid = fork() == 0) { /* child worker process */
-                executeJob(n); /* execute the job */
+                executeJob(n, pid); /* execute the job */
                 exit(0);
             }
         }
@@ -200,26 +200,26 @@ int selectJob()
 {
     int n = 0;
     cout << "selectJob: Select a highest priority job from the priority queue: \n";
-    if (SERVER_QUEUE.size > 0)
+    if (SERVER_QUEUE.size() > 0)
     {
         n = SERVER_QUEUE.front();
         SERVER_QUEUE.pop();
     }
-    else if (POWER_USER_QUEUE.size > 0)
+    else if (POWER_USER_QUEUE.size() > 0)
     {
         n = POWER_USER_QUEUE.front();
         POWER_USER_QUEUE.pop();
     }
-    else if (USER_QUEUE.size > 0)
+    else if (USER_QUEUE.size() > 0)
     {
-        n = USER_QUEUE.font();
+        n = USER_QUEUE.front();
         USER_QUEUE.pop();
     }
         
     return n;
 }
 
-void executeJob(int n)
+void executeJob(int n, int pid)
 {
     if (n >= 1 && n <= 30) {
         cout << "executeJob: execute server job " << n << endl;
