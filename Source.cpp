@@ -131,7 +131,7 @@ int* queLoader(string fileName)
         
     for (int i = 0; i <= 30; i++) 
     {
-        queFile >> theQue[i];
+        getline(queFile, i) >> theQue[i];
     }
 
     queFile.close();
