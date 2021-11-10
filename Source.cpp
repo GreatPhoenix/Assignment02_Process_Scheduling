@@ -1,5 +1,6 @@
 #include <queue>
 #include <iostream>
+#include <unistd.h>
 
 int N = 10;
 int MAX_JOB_QUEUE = 30;
