@@ -33,6 +33,7 @@ string fileUserQueue = "userQueue.txt";
 int intr = 0;
 
 void addToQue(string itemToAdd, queue<int> whatQueueToUse) {
+    
     whatQueueToUse.push(stoi(itemToAdd));
 
 }
@@ -68,15 +69,16 @@ void queLoader(string fileName)
     queFile.close();
 }
 
-bool updateQue(string fileArray[], string fileName) {
-    ifstream queFile;
+bool updateQue(queue<string> fileArray, string fileName) {
+    ofstream queFile;
     queFile.open(fileName);
 
-    for (int i = 0; i <= 30; i++) 
-    {
-        queFile << fileArray[i] << endl;
-
+    while (queFile << fileArray.front() << endl){
+        
     }
+
+    fileArray.empty();
+ 
     queFile.close();
 
     return(true);
