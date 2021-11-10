@@ -17,6 +17,7 @@ void jobGenerator();
 void jobScheduler();
 int selectJob();
 void executeJob(int n, int pid);
+void wake_up(int s);
 queue<int> SERVER_QUEUE;
 queue<int> POWER_USER_QUEUE;
 queue<int> USER_QUEUE;
