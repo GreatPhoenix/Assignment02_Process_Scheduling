@@ -114,7 +114,14 @@ int intr = 0;
 //
 //}
 
-string* queLoader(string fileName)
+void addToQue(int arrayQue[], queue<int> whatQueueToUse) {
+    for (int i = 0; i <= 30; i++) {
+        whatQueueToUse.push(arrayQue[i]);
+    }
+
+}
+
+int* queLoader(string fileName)
 {
     int theQue[30];
     ifstream queFile;
@@ -146,13 +153,6 @@ string* queLoader(string fileName)
 
 
     return theQue;
-}
-
-void addToQue(int arrayQue[], queue<int> whatQueueToUse){
-    for (int i = 0; i <= 30; i++){
-        whatQueueToUse.push(arrayQue[i]);
-    }
-
 }
 
 bool updateQue(string fileArray[], string fileName) {
