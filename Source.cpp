@@ -116,7 +116,7 @@ int intr = 0;
 
 string* queLoader(string fileName)
 {
-    string theQue[30];
+    int theQue[30];
     ifstream queFile;
 
     queFile.open(fileName);
@@ -129,7 +129,30 @@ string* queLoader(string fileName)
 
     queFile.close();
 
+    if (fileName == fileServerQueue){
+        addToQue(theQue,SERVER_QUEUE);
+    }
+    else if (fileName == filePowerUserQueue){
+        addToQue(theQue,POWER_USER_QUEUE);
+
+    }
+    else if (fileName == fileUserQueue){
+        addToQue(theQue,USER_QUEUE);
+
+    }
+    else{
+        cout << "welp somone typed in somthing wrong" << endl;
+    }
+
+
     return theQue;
+}
+
+void addToQue(int arrayQue[], queue<int> whatQueueToUse){
+    for (int i = 0; i <= 30; i++){
+        whatQueueToUse.push(arrayQue[i]);
+    }
+
 }
 
 bool updateQue(string fileArray[], string fileName) {
