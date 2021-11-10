@@ -65,8 +65,8 @@ void executeJob()
     }
     if (/*poweruserqueue*/)
     {
-        signal()
-
+        sleep();
+        signal(SIGINT, wake_up);
         // run
     }
     if (/*userqueue*/)
