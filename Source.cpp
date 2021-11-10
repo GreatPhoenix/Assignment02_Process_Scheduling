@@ -8,15 +8,15 @@ using namespace std;
 
 int N = 10;
 int MAX_JOB_QUEUE = 30;
-queue<int> SERVER_QUEUE;
-queue<int> POWER_USER_QUEUE;
-queue<int> USER_QUEUE;
+//queue<int> SERVER_QUEUE;
+//queue<int> POWER_USER_QUEUE;
+//queue<int> USER_QUEUE;
 
 int main() 
 {
     setJobQueues();           /* Set up the priority job queues with chosen file and data structure */
 
-    signal(SIGINT, wake_up);
+   // signal(SIGINT, wake_up);
 
     if (pid = fork() > 0) 
     {/* Parent, jobGenerator process */
@@ -32,10 +32,11 @@ int main()
         exit(0);
     }
 
-    while ((wpid = wait(&status)) > 0);
+    // while ((wpid = wait(&status)) > 0);
     return (1);
 }
 
+// must access
 void jobScheduler() 
 {
         while (i < N) 
@@ -65,19 +66,6 @@ int selectJob()
 {
     int n;
 
-    if (SERVER_QUEUE.size > 0)
-    {
-
-    }
-    else if (POWER_USER_QUEUE.size > 0)
-    {
-
-    }
-    else if (USER_QUEUE.size > 0)
-    {
-
-    }
-
     return n;
 }
 
@@ -86,6 +74,7 @@ void setJobQueues()
 
 }
 
+// must access
 void jobGenerator()
 {
 
