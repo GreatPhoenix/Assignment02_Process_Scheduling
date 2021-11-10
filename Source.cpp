@@ -1,5 +1,10 @@
-int main() {
-    …
+#include <queue>
+
+int N = 10;
+
+
+int main() 
+{
         setJobQueues();           /* Set up the priority job queues with chosen file and data structure */
 
     if (pid = fork() > 0) {/* Parent, jobGenerator process */
@@ -18,7 +23,6 @@ int main() {
 
 void jobScheduler(…) 
 {
-    …
         while (i < N) 
         {           /* schedule and run maximum N jobs */
 
@@ -35,4 +39,14 @@ void jobScheduler(…)
                 }
             i++;
         }
+}
+
+void executeJob(...)
+{
+
+}
+
+void selectJob(...)
+{
+
 }
