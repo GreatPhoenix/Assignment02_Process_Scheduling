@@ -15,10 +15,11 @@ void setJobQueues();
 void jobGenerator();
 void jobScheduler();
 int selectJob();
-void executeJob(int n, int pid);
+void executeJob(int n);
 queue<int> SERVER_QUEUE;
 queue<int> POWER_USER_QUEUE;
 queue<int> USER_QUEUE;
+int intr = 0;
 
 //int main() 
 //{
@@ -105,13 +106,13 @@ queue<int> USER_QUEUE;
 //
 //}
 
-string * queLoader (string fileName)
+string* queLoader(string fileName)
 {
     string theQue[30];
     ifstream queFile;
     queFile.open(fileName);
-    
-    for (int i = 0; i <= 30; i++){
+
+    for (int i = 0; i <= 30; i++) {
         queFile >> theQue[i];
     }
     queFile.close();
@@ -120,11 +121,11 @@ string * queLoader (string fileName)
 
 }
 
-bool updateQue (string fileArray[], string fileName){
+bool updateQue(string fileArray[], string fileName) {
     ifstream queFile;
     queFile.open(fileName);
 
-    for (int i = 0; i <= 30; i++){
+    for (int i = 0; i <= 30; i++) {
         queFile << fileArray[i] << endl;
 
     }
@@ -134,7 +135,7 @@ bool updateQue (string fileArray[], string fileName){
 
 }
 
-int main() 
+int main()
 {
     int pid = 0;
     setJobQueues(); /* Set up the priority job queues with chosen file and/or data structure */
@@ -208,7 +209,7 @@ int selectJob()
         n = USER_QUEUE.front();
         USER_QUEUE.pop();
     }
-        
+
     return n;
 }
 
@@ -221,8 +222,11 @@ void executeJob(int n, int pid)
     }
     else if (n >= 31 && n <= 60) {
         cout << "executeJob: execute power user job " << n << endl;
-        sleep();
-        signal(SIGINT, wake_up); // pls for hte love of god
+        while (true)
+        {
+            signal(SIGINT, wake_up);
+        }
+        // pls for hte love of god
         cout << "Power user job finished" << endl;
     }
     else if (n >= 61 && n <= 100) {
@@ -230,4 +234,10 @@ void executeJob(int n, int pid)
         sleep(2);
         cout << "User job finished" << endl;
     }
+}
+
+void wake_up(int s)
+{
+    cout << "\nI will wake up now.\n";
+    intr = 1;
 }
