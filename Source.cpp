@@ -12,6 +12,8 @@ int main()
 {
     setJobQueues();           /* Set up the priority job queues with chosen file and data structure */
 
+    signal(SIGINT, wake_up);
+
     if (pid = fork() > 0) 
     {/* Parent, jobGenerator process */
 
@@ -25,6 +27,7 @@ int main()
 
         exit(0);
     }
+    while ((wpid = wait(&status)) > 0);
     return (1);
 }
 
