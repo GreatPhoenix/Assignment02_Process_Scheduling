@@ -1,8 +1,6 @@
 //Use the following semaphore samples
 
 //a) Mutex Semaphore UP / DOWN sample code 1 (recommended)
-
-// create a semaphore using file create operation
 /* create a semaphore using file create operation */
 #include <iostream>
 #include <cstring>
@@ -13,7 +11,6 @@
 #include <fcntl.h>
 
 using namespace std;
-
 void down(int* semid, char* semname);
 void up(int semid, char* semname);
 
@@ -46,7 +43,6 @@ int main()
     return 1;
 }
 
-// pause everything
 void down(int* semid, char* semname)
 {
     while (*semid = creat(semname, 0) == -1) /* && error == EACCES)*/
