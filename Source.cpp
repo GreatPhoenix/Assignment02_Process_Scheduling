@@ -20,6 +20,8 @@ void jobScheduler();
 int selectJob();
 void executeJob(int n, int pid);
 void wake_up(int s);
+void down(int* semid, char* semname);
+void up(int semid, char* semname);
 queue<int> SERVER_QUEUE;
 queue<int> POWER_USER_QUEUE;
 queue<int> USER_QUEUE;
@@ -186,4 +188,21 @@ void wake_up(int s)
 {
     cout << "\nI will wake up now.\n";
     intr = 1;
+}
+
+void down(int* semid, char* semname)
+{
+    while (*semid = creat(semname, 0) == -1) /* && error == EACCES)*/
+    {
+        cout << "down " << semname << ": I am blocked.\n";
+        sleep(1);
+    }
+}
+
+// continue everything
+void up(int semid, char* semname)
+{
+    close(semid);
+    unlink(semname);
+    cout << "up " << semname << ": I am waked up.\n";
 }
