@@ -35,7 +35,7 @@ string fileUserQueue = "userQueue.txt";
 int intr = 0;
 
 void addToQue(string itemToAdd, queue<string> whatQueueToUse) {
-    
+    //cout << "addtoQue item: " << itemToAdd << endl;
     whatQueueToUse.push(itemToAdd);
 
 }
@@ -188,16 +188,19 @@ string selectJob()
 
     if (SERVER_QUEUE.size() > 0)
     {
+        cout << "selectJob Server" << endl;
         n = SERVER_QUEUE.front();
         SERVER_QUEUE.pop();
     }
     else if (POWER_USER_QUEUE.size() > 0)
     {
+        cout << "selectJob Power" << endl;
         n = POWER_USER_QUEUE.front();
         POWER_USER_QUEUE.pop();
     }
     else if (USER_QUEUE.size() > 0)
     {
+        cout << "selectJob User" << endl;
         n = USER_QUEUE.front();
         USER_QUEUE.pop();
     }
