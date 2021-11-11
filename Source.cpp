@@ -12,7 +12,7 @@
 #include <signal.h>
 #include <sstream>
 #define N 100 //N is the number of the worker processes. You may increase N to 100 when your program runs correctly
-#define M 50 //M is the number of jobs. You may increase M to 50 when your program runs correctly
+#define M 100 //M is the number of jobs. You may increase M to 50 when your program runs correctly
 
 using namespace std;
 
@@ -46,7 +46,7 @@ void queLoader(string fileName)
     ifstream queFile;
     string temp;
     queFile.open(fileName);
-    cout << "yeah i open " << fileName << endl; 
+    //cout << "yeah i open " << fileName << endl; 
         
      while(getline(queFile,temp))
     {
@@ -74,6 +74,11 @@ void queLoader(string fileName)
     } 
 
     queFile.close();
+
+    /*clear current file
+    queFile.open(fileName, ifstream::out | ifstream::trunc);
+    queFile.close();
+    */
 }
 
 bool updateQue(queue<string> fileArray, string fileName) {
@@ -125,7 +130,8 @@ void jobGenerator()
     srand(time(0));
     while (i < M) {
         // generate a random number between 1-100
-        n = rand() % 100 + 1;
+        //n = rand() % 100 + 1;
+        n++;
         cout << "jobGenerator: Job number is : " << n << endl;
         // Put the job n into the priority queue
         // write jobs into file
@@ -165,14 +171,16 @@ void jobScheduler()
 {
     int i = 0, pid = 0;
     string n = "";
+
+    queLoader(fileServerQueue);
+    queLoader(filePowerUserQueue);
+    queLoader(fileUserQueue);
+
     while (i < N) { /* schedule and run maximum N jobs */
-        queLoader(fileServerQueue);
-        queLoader(filePowerUserQueue);
-        queLoader(fileUserQueue);
 
         n = selectJob(); /* pick a job from the job priority queues */
         
-        cout << "jobScheduler n = " << n << endl;
+        //cout << "jobScheduler n = " << n << endl;
         if (n != "") { /* valid job id */
             if (pid = fork() == 0) { /* child worker process */
                 executeJob(n, pid); /* execute the job */
@@ -222,9 +230,10 @@ void executeJob(string x, int pid)
     }
     else if (n >= 31 && n <= 60) {
         cout << "executeJob: execute power user job " << n << endl;
-        while (!intr)
+        while (intr)
         {
             signal(SIGINT, wake_up);
+            //cout << "job ID: " << n << endl; //uncomment if you want to kill the computer you're using
         }
         // pls for hte love of god
         cout << "Power user job finished" << endl;
