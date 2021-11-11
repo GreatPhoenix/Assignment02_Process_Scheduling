@@ -6,6 +6,8 @@
 #include <fcntl.h>
 // include c++ header files
 #include <string>
+#include <cstring>
+#include <sys/stat.h>
 #include <iostream>
 #include <fstream>
 #include <queue>
@@ -17,13 +19,13 @@
 using namespace std;
 
 void setJobQueues();
-void jobGenerator();
-void jobScheduler();
+void jobGenerator(int pid);
+void jobScheduler(int pid);
 string selectJob();
 void executeJob(string x, int pid);
 void wake_up(int s);
 void down(int* semid, char* semname);
-void up(int semid, char* semname);
+void up(int* semid, char* semname);
 queue<string> SERVER_QUEUE;
 queue<string> POWER_USER_QUEUE;
 queue<string> USER_QUEUE;
@@ -31,14 +33,15 @@ string fileServerQueue = "serverQueue.txt";
 string filePowerUserQueue = "powerUserQueue.txt";
 string fileUserQueue = "userQueue.txt";
 
+char serverSemname[30];
+char powerUserSemname[30];
+char userSemname[30];
+
+strcpy(serverSemname, fileServerQueue);
+strcpy(powerUserSemname, filePowerUserQueue);
+strcpy(userSemname, fileUserQueue);
 
 int intr = 0;
-
-void addToQue(string itemToAdd, queue<string> whatQueueToUse) {
-    //cout << "addtoQue item: " << itemToAdd << endl;
-    whatQueueToUse.push(itemToAdd);
-
-}
 
 void queLoader(string fileName)
 {
@@ -55,16 +58,13 @@ void queLoader(string fileName)
 
         if (fileName == fileServerQueue){
         SERVER_QUEUE.push(temp);
-        //addToQue(temp,SERVER_QUEUE);
     }
     else if (fileName == filePowerUserQueue){
         POWER_USER_QUEUE.push(temp);
-        //addToQue(temp,POWER_USER_QUEUE);
 
     }
     else if (fileName == fileUserQueue){
         USER_QUEUE.push(temp);
-        //addToQue(temp,USER_QUEUE);
 
     }
     else{
@@ -74,11 +74,6 @@ void queLoader(string fileName)
     } 
 
     queFile.close();
-
-    /*clear current file
-    queFile.open(fileName, ifstream::out | ifstream::trunc);
-    queFile.close();
-    */
 }
 
 bool updateQue(queue<string> fileArray, string fileName) {
@@ -105,11 +100,11 @@ int main()
     int pid = 0;
     setJobQueues(); /* Set up the priority job queues with chosen file and/or data structure */
     if (pid = fork() > 0) { /* jobGenerator process */
-        jobGenerator(); /* generate random jobs and put them into the priority queues. The priority queues must be protected in a critical region */
+        jobGenerator(pid); /* generate random jobs and put them into the priority queues. The priority queues must be protected in a critical region */
         exit(0);
     }
     else {/* job scheduler process */
-        jobScheduler(); /* schedule and execute the jobs. */
+        jobScheduler(pid); /* schedule and execute the jobs. */
         exit(0);
     }
     return (1);
@@ -121,7 +116,7 @@ void setJobQueues()
     queLoader(fileServerQueue);
 }
 
-void jobGenerator()
+void jobGenerator(int pid)
 {
     int i = 0, n = 0;
     cout << "jobGenerator: Use a loop to generate M jobs in the priority queue: \n";
@@ -138,16 +133,18 @@ void jobGenerator()
             //serverque
             
             SERVER_QUEUE.push(to_string(n));
-
+            down(&pid, 'serverQueue.txt');
             updateQue(SERVER_QUEUE,fileServerQueue);
-
+            up(&pid, "serverQueue.txt");
         }
         else if (n >= 30 && n <= 60){
             
             // Power Job
             
             POWER_USER_QUEUE.push(to_string(n));
+            down(&pid, "powerUserQueue.txt");
             updateQue(POWER_USER_QUEUE,filePowerUserQueue);
+            up(&pid, "powerUserQueue.txt");
 
         }
         else if (n >= 61 && n <= 100){
@@ -157,7 +154,9 @@ void jobGenerator()
             
             // user job
             USER_QUEUE.push(to_string(n));
+            down(&pid, "userQueue.txt");
             updateQue(USER_QUEUE,fileUserQueue);
+            up(&pid, "userQueue.txt");
         }
 
 
@@ -167,14 +166,22 @@ void jobGenerator()
     }
 }
 
-void jobScheduler()
+void jobScheduler(int pid)
 {
-    int i = 0, pid = 0;
+    int i = 0;
     string n = "";
 
+    down(&pid, "serverQueue.txt");
     queLoader(fileServerQueue);
+    up(&pid, "serverQueue.txt");
+
+    down(&pid, "powerUserQueue.txt");
     queLoader(filePowerUserQueue);
+    up(&pid, "powerUserQueue.txt");
+
+    down(&pid, "userQueue.txt");
     queLoader(fileUserQueue);
+    up(&pid, "userQueue.txt");
 
     while (i < N) { /* schedule and run maximum N jobs */
 
@@ -224,7 +231,7 @@ void executeJob(string x, int pid)
     int n = stoi(x);
     if (n >= 1 && n <= 30) {
         cout << "executeJob: execute server job " << n << endl;
-        cout << pid;
+        cout << pid << endl;
         cout << "Server job finished" << endl;
     }
     else if (n >= 31 && n <= 60) {
@@ -260,7 +267,7 @@ void down(int* semid, char* semname)
 }
 
 // continue everything
-void up(int semid, char* semname)
+void up(int* semid, char* semname)
 {
     close(semid);
     unlink(semname);
