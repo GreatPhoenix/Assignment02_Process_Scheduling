@@ -18,14 +18,14 @@ using namespace std;
 void setJobQueues();
 void jobGenerator();
 void jobScheduler();
-int selectJob();
-void executeJob(int n, int pid);
+string selectJob();
+void executeJob(string x, int pid);
 void wake_up(int s);
 void down(int* semid, char* semname);
 void up(int semid, char* semname);
-queue<int> SERVER_QUEUE;
-queue<int> POWER_USER_QUEUE;
-queue<int> USER_QUEUE;
+queue<string> SERVER_QUEUE;
+queue<string> POWER_USER_QUEUE;
+queue<string> USER_QUEUE;
 string fileServerQueue = "serverQueue.txt";
 string filePowerUserQueue = "powerUserQueue.txt";
 string fileUserQueue = "userQueue.txt";
@@ -33,9 +33,9 @@ string fileUserQueue = "userQueue.txt";
 
 int intr = 0;
 
-void addToQue(string itemToAdd, queue<int> whatQueueToUse) {
+void addToQue(string itemToAdd, queue<string> whatQueueToUse) {
     
-    whatQueueToUse.push(stoi(itemToAdd));
+    whatQueueToUse.push(itemToAdd);
 
 }
 
@@ -128,11 +128,12 @@ void jobGenerator()
 
 void jobScheduler()
 {
-    int i = 0, n = 0, pid = 0;
+    int i = 0, pid = 0;
+    string n = "";
     while (i < N) { /* schedule and run maximum N jobs */
         n = selectJob(); /* pick a job from the job priority queues */
         //cout << "jobScheduler n = " << n << endl;
-        if (n > 0) { /* valid job id */
+        if (n != "") { /* valid job id */
             if (pid = fork() == 0) { /* child worker process */
                 executeJob(n, pid); /* execute the job */
                 exit(0);
@@ -142,9 +143,9 @@ void jobScheduler()
     }
 }
 
-int selectJob()
+string selectJob()
 {
-    int n = 0;
+    string n = "";
     cout << "selectJob: Select a highest priority job from the priority queue: \n";
     if (SERVER_QUEUE.size() > 0)
     {
@@ -165,8 +166,9 @@ int selectJob()
     return n;
 }
 
-void executeJob(int n, int pid)
+void executeJob(string x, int pid)
 {
+    int n = stoi(x);
     if (n >= 1 && n <= 30) {
         cout << "executeJob: execute server job " << n << endl;
         cout << pid;
