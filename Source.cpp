@@ -131,6 +131,7 @@ void jobScheduler()
     int i = 0, n = 0, pid = 0;
     while (i < N) { /* schedule and run maximum N jobs */
         n = selectJob(); /* pick a job from the job priority queues */
+        //cout << "jobScheduler n = " << n << endl;
         if (n > 0) { /* valid job id */
             if (pid = fork() == 0) { /* child worker process */
                 executeJob(n, pid); /* execute the job */
@@ -173,7 +174,7 @@ void executeJob(int n, int pid)
     }
     else if (n >= 31 && n <= 60) {
         cout << "executeJob: execute power user job " << n << endl;
-        while (true)
+        while (!intr)
         {
             signal(SIGINT, wake_up);
         }
