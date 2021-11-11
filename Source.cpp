@@ -73,8 +73,10 @@ void queLoader(string fileName)
 bool updateQue(queue<string> fileArray, string fileName) {
     ofstream queFile;
     queFile.open(fileName);
+    cout << "hi there " << fileArray.front() << endl;
 
     while (queFile << fileArray.front() << endl){
+        fileArray.pop();
         
     }
 
@@ -122,18 +124,22 @@ void jobGenerator()
         // write jobs into file
         if (n >= 1 && n <= 30){
             //serverque
+            cout << "inside JobGenerator Server part" << endl;
             updateQue(SERVER_QUEUE,fileServerQueue);
 
         }
         else if (n >= 30 && n <= 60){
             
             // Power Job
+            cout << "inside Power User Que" << endl;
             updateQue(POWER_USER_QUEUE,filePowerUserQueue);
+
         }
         else if (n >= 61 && n <= 100){
             if (n == 69){
                 cout << "nice" << endl;
             }
+            cout << "inside User Que thing" << endl;
             // user job
             updateQue(USER_QUEUE,fileUserQueue);
         }
