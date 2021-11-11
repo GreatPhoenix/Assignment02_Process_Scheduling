@@ -119,7 +119,6 @@ void setJobQueues()
 {
     cout << "Main: Set up the job priority queue: \n";
     queLoader(fileServerQueue);
-
 }
 
 void jobGenerator()
