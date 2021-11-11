@@ -126,13 +126,14 @@ void jobGenerator()
 
         }
         else if (n >= 30 && n <= 60){
-            if (n == 69){
-                cout << "nice" << endl;
-            }
+            
             // Power Job
             updateQue(POWER_USER_QUEUE,filePowerUserQueue);
         }
         else if (n >= 61 && n <= 100){
+            if (n == 69){
+                cout << "nice" << endl;
+            }
             // user job
             updateQue(USER_QUEUE,fileUserQueue);
         }
