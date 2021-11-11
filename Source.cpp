@@ -221,7 +221,6 @@ string selectJob()
 
 void executeJob(string x, int pid)
 {
-    
     int n = stoi(x);
     if (n >= 1 && n <= 30) {
         cout << "executeJob: execute server job " << n << endl;
