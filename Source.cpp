@@ -73,7 +73,7 @@ void queLoader(string fileName)
 bool updateQue(queue<string> fileArray, string fileName) {
     ofstream queFile;
     queFile.open(fileName);
-    cout << "hi there " << fileArray.front() << endl;
+    //cout << "hi there " << fileArray.front() << endl;
 
     for (int i =0; i < fileArray.size(); i++){
         queFile << fileArray.front() << endl;
@@ -125,7 +125,7 @@ void jobGenerator()
         // write jobs into file
         if (n >= 1 && n <= 30){
             //serverque
-            cout << "inside JobGenerator Server part" << endl;
+            
             SERVER_QUEUE.push(to_string(n));
             updateQue(SERVER_QUEUE,fileServerQueue);
 
@@ -133,7 +133,7 @@ void jobGenerator()
         else if (n >= 30 && n <= 60){
             
             // Power Job
-            cout << "inside Power User Que" << endl;
+            
             POWER_USER_QUEUE.push(to_string(n));
             updateQue(POWER_USER_QUEUE,filePowerUserQueue);
 
@@ -142,7 +142,7 @@ void jobGenerator()
             if (n == 69){
                 cout << "nice" << endl;
             }
-            cout << "inside User Que thing" << endl;
+            
             // user job
             USER_QUEUE.push(to_string(n));
             updateQue(USER_QUEUE,fileUserQueue);
@@ -160,6 +160,10 @@ void jobScheduler()
     int i = 0, pid = 0;
     string n = "";
     while (i < N) { /* schedule and run maximum N jobs */
+        queLoader(fileServerQueue);
+        queLoader(filePowerUserQueue);
+        queLoader(fileUserQueue);
+
         n = selectJob(); /* pick a job from the job priority queues */
         //cout << "jobScheduler n = " << n << endl;
         if (n != "") { /* valid job id */
@@ -176,6 +180,8 @@ string selectJob()
 {
     string n = "";
     cout << "selectJob: Select a highest priority job from the priority queue: \n";
+    
+
     if (SERVER_QUEUE.size() > 0)
     {
         n = SERVER_QUEUE.front();
@@ -197,6 +203,7 @@ string selectJob()
 
 void executeJob(string x, int pid)
 {
+    
     int n = stoi(x);
     if (n >= 1 && n <= 30) {
         cout << "executeJob: execute server job " << n << endl;
