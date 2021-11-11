@@ -75,12 +75,13 @@ bool updateQue(queue<string> fileArray, string fileName) {
     queFile.open(fileName);
     cout << "hi there " << fileArray.front() << endl;
 
-    while (queFile << fileArray.front() << endl){
+    for (int i =0; i < fileArray.size(); i++){
+        queFile << fileArray.front() << endl;
         fileArray.pop();
         
     }
 
-    fileArray.empty();
+    //fileArray.empty();
  
     queFile.close();
 
@@ -125,6 +126,7 @@ void jobGenerator()
         if (n >= 1 && n <= 30){
             //serverque
             cout << "inside JobGenerator Server part" << endl;
+            SERVER_QUEUE.push(to_string(n));
             updateQue(SERVER_QUEUE,fileServerQueue);
 
         }
@@ -132,6 +134,7 @@ void jobGenerator()
             
             // Power Job
             cout << "inside Power User Que" << endl;
+            POWER_USER_QUEUE.push(to_string(n));
             updateQue(POWER_USER_QUEUE,filePowerUserQueue);
 
         }
@@ -141,6 +144,7 @@ void jobGenerator()
             }
             cout << "inside User Que thing" << endl;
             // user job
+            USER_QUEUE.push(to_string(n));
             updateQue(USER_QUEUE,fileUserQueue);
         }
 
@@ -187,7 +191,7 @@ string selectJob()
         n = USER_QUEUE.front();
         USER_QUEUE.pop();
     }
-
+    cout  << n << endl; 
     return n;
 }
 
