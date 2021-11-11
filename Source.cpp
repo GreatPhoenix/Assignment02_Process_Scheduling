@@ -54,14 +54,17 @@ void queLoader(string fileName)
         //cout << "this is temp" << temp << endl;
 
         if (fileName == fileServerQueue){
-        addToQue(temp,SERVER_QUEUE);
+        SERVER_QUEUE.push(temp);
+        //addToQue(temp,SERVER_QUEUE);
     }
     else if (fileName == filePowerUserQueue){
-        addToQue(temp,POWER_USER_QUEUE);
+        POWER_USER_QUEUE.push(temp);
+        //addToQue(temp,POWER_USER_QUEUE);
 
     }
     else if (fileName == fileUserQueue){
-        addToQue(temp,USER_QUEUE);
+        USER_QUEUE.push(temp);
+        //addToQue(temp,USER_QUEUE);
 
     }
     else{
@@ -188,19 +191,19 @@ string selectJob()
 
     if (SERVER_QUEUE.size() > 0)
     {
-        cout << "selectJob Server" << endl;
+        
         n = SERVER_QUEUE.front();
         SERVER_QUEUE.pop();
     }
     else if (POWER_USER_QUEUE.size() > 0)
     {
-        cout << "selectJob Power" << endl;
+        
         n = POWER_USER_QUEUE.front();
         POWER_USER_QUEUE.pop();
     }
     else if (USER_QUEUE.size() > 0)
     {
-        cout << "selectJob User" << endl;
+    
         n = USER_QUEUE.front();
         USER_QUEUE.pop();
     }
