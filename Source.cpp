@@ -120,6 +120,24 @@ void jobGenerator()
         cout << "jobGenerator: Job number is : " << n << endl;
         // Put the job n into the priority queue
         // write jobs into file
+        if (n >= 1 && n <= 30){
+            //serverque
+            updateQue(SERVER_QUEUE,fileServerQueue);
+
+        }
+        else if (n >= 30 && n <= 60){
+            if (n == 69){
+                cout << "nice" << endl;
+            }
+            // Power Job
+            updateQue(POWER_USER_QUEUE,filePowerUserQueue);
+        }
+        else if (n >= 61 && n <= 100){
+            // user job
+            updateQue(USER_QUEUE,fileUserQueue);
+        }
+
+
 
         usleep(100); //100 can be adjusted to synchronize the job generation and job scheduling processes.
         i++;
