@@ -10,6 +10,7 @@
 #include <fstream>
 #include <queue>
 #include <signal.h>
+#include <sstream>
 #define N 100 //N is the number of the worker processes. You may increase N to 100 when your program runs correctly
 #define M 50 //M is the number of jobs. You may increase M to 50 when your program runs correctly
 
@@ -47,9 +48,11 @@ void queLoader(string fileName)
     queFile.open(fileName);
     cout << "yeah i open " << fileName << endl; 
         
-    while (queFile >> temp) 
-
+     while(getline(queFile,temp))
     {
+        istringstream iss(temp);
+        //cout << "this is temp" << temp << endl;
+
         if (fileName == fileServerQueue){
         addToQue(temp,SERVER_QUEUE);
     }
@@ -65,7 +68,7 @@ void queLoader(string fileName)
         cout << "welp somone typed in somthing wrong" << endl;
     }
 
-    }
+    } 
 
     queFile.close();
 }
@@ -165,7 +168,8 @@ void jobScheduler()
         queLoader(fileUserQueue);
 
         n = selectJob(); /* pick a job from the job priority queues */
-        //cout << "jobScheduler n = " << n << endl;
+        
+        cout << "jobScheduler n = " << n << endl;
         if (n != "") { /* valid job id */
             if (pid = fork() == 0) { /* child worker process */
                 executeJob(n, pid); /* execute the job */
